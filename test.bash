@@ -1,4 +1,6 @@
 #!/bin/bash
+#SPDX-FileCopyrightText: 2025 Ryota Sugawara
+#SPDX-License-Identifier: BSD-3-Clause
 
 # スクリプトの開始を表示
 echo "Starting ROS2 package test..."
