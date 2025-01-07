@@ -4,31 +4,39 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
-import psutil  # バッテリー情報を取得するためのライブラリ
-import random  # 消費量を擬似的に生成するためのライブラリ
+import random
+
 
 class BatteryPublisher(Node):
     def __init__(self):
         super().__init__('battery_publisher')
-        self.publisher_ = self.create_publisher(String, 'battery_stats', 10)
-        self.timer = self.create_timer(1.0, self.publish_battery_stats)
+        self.publisher_ = self.create_publisher(String, 'battery_status', 10)
+        self.timer = self.create_timer(2.0, self.publish_battery_status)  # 2秒ごとに実行
+        self.get_logger().info('Battery Publisher Node started.')
 
-    def publish_battery_stats(self):
-        battery = psutil.sensors_battery()  # バッテリー情報を取得
-        if battery:
-            charge = battery.percent  # 現在のバッテリー充電量（%）
-            consumption = random.uniform(0.5, 1.5)  # 擬似的な消費量（例: ワット単位）
-            msg = String()
-            msg.data = f'Battery: {charge}% | Consumption: {consumption:.2f}W'
-            self.publisher_.publish(msg)
-            self.get_logger().info(f'Publishing: {msg.data}')
-        else:
-            self.get_logger().warn('Battery information not available.')
+    def publish_battery_status(self):
+        # ランダムにバッテリー残量を生成（例：10%から100%）
+        battery_level = random.randint(10, 100)
+        # 消費量もランダムに生成（例：1%から10%）
+        consumption_rate = random.randint(1, 10)
+        msg = String()
+        msg.data = f'Battery Level: {battery_level}%, Consumption Rate: {consumption_rate}%/hour'
+        self.publisher_.publish(msg)
+        self.get_logger().info(f'Published: {msg.data}')
 
-def main():
-    rclpy.init()
+
+def main(args=None):
+    rclpy.init(args=args)
     node = BatteryPublisher()
-    rclpy.spin(node)
-    node.destroy_node()
-    rclpy.shutdown()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        node.get_logger().info('Node stopped cleanly')
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
 
