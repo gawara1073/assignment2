@@ -17,8 +17,8 @@
 `ros2 topic echo /battery_status` 
 
 ## 出力例
--充電中: `Battery Level: 53.74%, Status: Charging`  
--充電してない: `Battery Level: 54.46%, Status: Discharging`
+- 充電中: `Battery Level: 53.74%, Status: Charging`  
+- 充電してない: `Battery Level: 54.46%, Status: Discharging`
 ## ライセンス
 このプロジェクトは、3条項BSDライセンスの下、再頒布および使用が許可されています。
 
