@@ -10,6 +10,9 @@
 `git clone https://github.com/gawara1073/assignment2.git`
 
 ## 使用方法
+コマンドを入力しインストールをしてください。  
+`pip install psutil`  
+
 以下のコマンドを実行します。  
 `ros2 run my_package battery_publisher`  
 
