@@ -23,8 +23,8 @@
 [INFO] [1736242237.572486751] [battery_publisher]: Publishing: Battery: 68.46% | Consumption: 1.20W
 
 - リスナー
-  [INFO] [1736242372.401926013] [battery_listener]: Received: Battery: 68.46% | Consumption: 0.77W
-[INFO] [1736242373.379820669] [battery_listener]: Received: Battery: 68.46% | Consumption: 1.46W\
+[INFO] [1736242372.401926013] [battery_listener]: Received: Battery: 68.46% | Consumption: 0.77W
+[INFO] [1736242373.379820669] [battery_listener]: Received: Battery: 68.46% | Consumption: 1.46W
 [INFO] [1736242374.380403723] [battery_listener]: Received: Battery: 68.46% | Consumption: 0.73W
 
 ## ライセンス
