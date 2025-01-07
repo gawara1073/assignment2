@@ -2,42 +2,27 @@
 #SPDX-FileCopyrightText: 2025 Ryota Sugawara
 #SPDX-License-Identifier: BSD-3-Clause
 
-# スクリプトの開始を表示
-echo "Starting ROS2 package test..."
+# スクリプトをエラーで停止する
+set -e
 
-# ワークスペースのセットアップ
-echo "Sourcing ROS2 environment..."
-source /opt/ros/<your_ros2_distro>/setup.bash  # <your_ros2_distro> を galactic や humble に変更
+echo "=== Setting up ROS2 workspace ==="
+source install/setup.bash
 
-echo "Sourcing workspace..."
-source ~/assignment2/ros2_ws/install/setup.bash
-
-# ワークスペースのビルド
-echo "Building workspace..."
-colcon build
-if [ $? -ne 0 ]; then
-    echo "Build failed. Exiting."
-    exit 1
-fi
-
-# パブリッシャーノードをバックグラウンドで起動
-echo "Starting battery_publisher node..."
+echo "=== Starting battery_publisher node ==="
+# バックグラウンドでノードを起動
 ros2 run my_package battery_publisher &
 PUBLISHER_PID=$!
 
-# リスナーノードを起動
-echo "Starting battery_listener node..."
-ros2 run my_package battery_listener &
-LISTENER_PID=$!
-
-# 5秒間待機
-echo "Waiting for 5 seconds to observe node output..."
+# 少し待機してからデータを確認
 sleep 5
 
-# ノードの停止
-echo "Stopping nodes..."
-kill $PUBLISHER_PID
-kill $LISTENER_PID
+echo "=== Subscribing to /battery_status topic ==="
+# トピックのデータを1回だけ受け取る
+ros2 topic echo /battery_status --once
 
-# スクリプトの終了を表示
-echo "Test completed."
+# ノードを停止する
+echo "=== Stopping battery_publisher node ==="
+kill $PUBLISHER_PID
+
+echo "=== Test completed ==="
+
