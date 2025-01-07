@@ -15,3 +15,7 @@
 
 その後、別の端末で以下のコマンドを実行します。
 `ros2 run my_package battery_listener` 
+
+## 出力例
+パブリッシャ―
+
