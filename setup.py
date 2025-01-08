@@ -3,7 +3,7 @@ from setuptools import setup
 package_name = 'my_package'
 
 setup(
-    name=package_name,
+    name='my_package',
     version='0.0.1',
     packages=[package_name],
     data_files=[
@@ -21,7 +21,6 @@ setup(
     entry_points={
         'console_scripts': [
             'battery_publisher = my_package.battery_publisher:main',
-            'battery_listener = my_package.battery_listener:main',
         ],
     },
 )
