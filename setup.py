@@ -3,12 +3,12 @@ from setuptools import setup
 package_name = 'my_package'
 
 setup(
-    name=package_name,
+    name=my_package,
     version='0.0.0',
-    packages=[package_name],
+    packages=[my_package],
     data_files=[
-        ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/resource', []),
+        ('share/' + my_package, ['package.xml']),
+        ('share/' + my_package + '/resource', []),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
