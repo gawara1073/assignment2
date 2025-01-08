@@ -5,11 +5,11 @@ package_name = 'my_package'
 setup(
     name='my_package',
     version='0.0.1',
-    packages=[package_name],
+    packages=[my_package],
     data_files=[
         ('share/ament_index/resource_index/packages',
-         ['resource/' + package_name]),
-        ('share/' + package_name, ['package.xml']),
+         ['resource/' + my_packsge]),
+        ('share/' + my_package, ['package.xml']),
     ],
     install_requires=['setuptools', 'psutil'],
     zip_safe=True,
