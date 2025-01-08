@@ -8,7 +8,6 @@ setup(
     packages=[package_name],
     data_files=[
         ('share/' + package_name, ['package.xml']),
-        ('share/' + package_name + '/resource', []),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
