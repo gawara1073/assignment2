@@ -3,15 +3,14 @@ from setuptools import setup
 package_name = 'my_package'
 
 setup(
-    name='my_package',
-    version='0.0.1',
-    packages=[my_package],
+    name=package_name,
+    version='0.0.0',
+    packages=[package_name],
     data_files=[
-        ('share/ament_index/resource_index/packages',
-         ['resource/' + my_packsge]),
-        ('share/' + my_package, ['package.xml']),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/resource', []),
     ],
-    install_requires=['setuptools', 'psutil'],
+    install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Ryota Sugawara',
     maintainer_email='sugawararyota0813@icloud.com',
