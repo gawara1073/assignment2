@@ -1,20 +1,20 @@
-from setuptools import setup
-
 package_name = 'my_package'
 
+from setuptools import setup
+
 setup(
-    name=my_package,
+    name=package_name,
     version='0.0.0',
-    packages=[my_package],
+    packages=[package_name],
     data_files=[
-        ('share/' + my_package, ['package.xml']),
-        ('share/' + my_package + '/resource', []),
+        ('share/' + package_name, ['package.xml']),
+        ('share/' + package_name + '/resource', []),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='Ryota Sugawara',
     maintainer_email='sugawararyota0813@icloud.com',
-    description='A ROS 2 package for monitoring and publishing battery charge and consumption.',
+    description='A ROS 2 package for monitoring and publishing',
     license='BSD-3-Clause',
     tests_require=['pytest'],
     entry_points={
