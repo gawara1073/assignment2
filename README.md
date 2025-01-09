@@ -23,7 +23,7 @@
 
 2. ワークスペースを構築します。
    ```bash
-   cd my_package/src
+   cd ros2_ws/my_package
    colcon build
    ```
 
