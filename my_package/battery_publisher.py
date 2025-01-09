@@ -7,29 +7,26 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import psutil
 
-
 class BatteryPublisher(Node):
     def __init__(self):
         super().__init__('battery_publisher')
         self.publisher_ = self.create_publisher(String, 'battery_status', 10)
         self.timer = self.create_timer(1.0, self.publish_battery_status)
-        self.get_logger().info("Battery Publisher Node has started.")
 
     def publish_battery_status(self):
         # psutilを使ってバッテリー情報を取得
-        battery = psutil.sensors_battery()
+        battery = psutil.sensors_battery()  # batteryを定義
+        if battery is None:  # バッテリー情報が取得できない場合
+            print("バッテリー情報が取得できません。このシステムはバッテリー非対応の可能性があります。")
+            return  # 処理を終了
 
-        if battery is not None:
-            # バッテリーレベルと消費率を取得
-            battery_level = battery.percent  # バッテリー残量（％）
-            is_charging = battery.power_plugged  # 充電中かどうか
-            status = "Charging" if is_charging else "Discharging"
-            msg = String()
-            msg.data = f"Battery Level: {battery_level}%, Status: {status}"
-            self.publisher_.publish(msg)
-            self.get_logger().info(f"Publishing: {msg.data}")
-        else:
-            self.get_logger().error("Battery information is not available on this system.")
+        # バッテリーレベルと状態を取得
+        battery_level = battery.percent  # バッテリー残量（％）
+        is_charging = battery.power_plugged  # 充電中かどうか
+        status = "Charging" if is_charging else "Discharging"
+        msg = String()
+        msg.data = f"Battery Level: {battery_level}%, Status: {status}"
+        self.publisher_.publish(msg)
 
 
 def main(args=None):
@@ -38,7 +35,7 @@ def main(args=None):
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
-        node.get_logger().info("Node stopped manually.")
+        pass
     finally:
         node.destroy_node()
         rclpy.shutdown()
@@ -46,3 +43,4 @@ def main(args=None):
 
 if __name__ == '__main__':
     main()
+
